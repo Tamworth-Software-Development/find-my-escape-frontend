@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">find-my-escape-frontend</string>
+    <string-array name="activity_array">
+        <item>Nightlife</item>
+        <item>Beach</item>
+        <item>Culture</item>
+        <item>Tourist Attractions</item>
+        <item>Restaurants</item>
+        <item>Nature</item>
+        <item>Sport</item>
+    </string-array>
 </resources>
