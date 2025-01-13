@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center"
+    android:background="#FFFFFF">
+
+    <!-- Email Input Field -->
+    <EditText
+        android:id="@+id/emailEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/black"
+        android:drawableStart="@drawable/ic_email"
+        android:drawablePadding="10dp" />
+
+    <!-- Password Input Field -->
+    <EditText
+        android:id="@+id/passwordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/black"
+        android:drawableStart="@drawable/ic_lock"
+        android:drawablePadding="10dp" />
+
+    <!-- Login Button -->
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/login"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#4CAF50"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Signup Navigation Button -->
+    <Button
+        android:id="@+id/signupButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Go to Signup"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#2196F3" />
+
+</LinearLayout>
