@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:71366405186:android:4e6629512a7e08ddbf51db",
+        "mobilesdk_app_id": "1:71366405186:android:dac1149b0358d607bf51db",
         "android_client_info": {
-          "package_name": "com.northcoders.findmyescape"
+          "package_name": "com.northcoders.find_my_escape_frontend"
         }
       },
       "oauth_client": [],
