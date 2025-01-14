@@ -15,6 +15,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.northcoders.find_my_escape_frontend.model.User;
+import com.northcoders.find_my_escape_frontend.service.ApiService;
+import com.northcoders.find_my_escape_frontend.service.RetrofitInstance;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Signup extends AppCompatActivity {
 
@@ -95,6 +102,29 @@ public class Signup extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
+
+                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                    String uid = user != null ? user.getUid() : null;
+                                    String email = user != null ? user.getEmail() : null;
+
+                                    ApiService apiService = RetrofitInstance.getRetrofitInstance().create(ApiService.class);
+                                    User userObj = new User(uid, email, name);
+                                    apiService.signupUser(userObj).enqueue(new Callback<Void>() {
+                                        @Override
+                                        public void onResponse(Call<Void> call, Response<Void> response) {
+                                            if (response.isSuccessful()) {
+                                                Toast.makeText(Signup.this, "User registered!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(Signup.this, "Failed to register user in backend.", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<Void> call, Throwable t) {
+                                            Toast.makeText(Signup.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+
                                     Toast.makeText(Signup.this, "Account Created",
                                             Toast.LENGTH_SHORT).show();
 
