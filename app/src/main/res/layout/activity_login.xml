@@ -8,7 +8,6 @@
     android:gravity="center"
     android:background="#FFFFFF">
 
-    <!-- Email Input Field -->
     <EditText
         android:id="@+id/emailEditText"
         android:layout_width="match_parent"
@@ -21,7 +20,6 @@
         android:drawableStart="@drawable/ic_email"
         android:drawablePadding="10dp" />
 
-    <!-- Password Input Field -->
     <EditText
         android:id="@+id/passwordEditText"
         android:layout_width="match_parent"
@@ -34,7 +32,6 @@
         android:drawableStart="@drawable/ic_lock"
         android:drawablePadding="10dp" />
 
-    <!-- Login Button -->
     <Button
         android:id="@+id/loginButton"
         android:layout_width="match_parent"
@@ -44,13 +41,13 @@
         android:backgroundTint="#4CAF50"
         android:layout_marginBottom="16dp" />
 
-    <!-- Signup Navigation Button -->
     <Button
-        android:id="@+id/signupButton"
+        android:id="@+id/signupPageButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Go to Signup"
-        android:textColor="#FFFFFF"
+        android:text="@string/create_an_account"
+        android:background="@android:color/transparent"
+        android:textColor="#000000"
         android:backgroundTint="#2196F3" />
 
 </LinearLayout>
