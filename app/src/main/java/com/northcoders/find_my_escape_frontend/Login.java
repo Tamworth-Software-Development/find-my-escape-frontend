@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class Login extends AppCompatActivity {
 
     EditText emailEditText, passwordEditText;
-    Button loginButton;
+    Button loginButton, signupPageButton;
     FirebaseAuth mAuth;
 
 
@@ -46,7 +46,7 @@ public class Login extends AppCompatActivity {
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);
-        // todo: signup button declaration
+        signupPageButton = findViewById(R.id.signupPageButton);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,11 +73,6 @@ public class Login extends AppCompatActivity {
                     return;
                 }
 
-                if (password.length() < 6) {
-                    passwordEditText.setError("Password must be at least 6 characters");
-                    passwordEditText.requestFocus();
-                    return;
-                }
 
                 mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -100,7 +95,13 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        //todo: signup button implementation
-
+        signupPageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Signup.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 }
