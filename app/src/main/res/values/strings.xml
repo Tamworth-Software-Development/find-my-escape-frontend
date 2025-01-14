@@ -3,4 +3,11 @@
     <string name="password">Password</string>
     <string name="email">Email</string>
     <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="find_my_escape">Find My Escape</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="signup">Signup</string>
+    <string name="already_have_an_account_login">Already have an account? Login</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="name">Name</string>
 </resources>
