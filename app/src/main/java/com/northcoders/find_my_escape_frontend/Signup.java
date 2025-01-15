@@ -113,7 +113,7 @@ public class Signup extends AppCompatActivity {
                                         @Override
                                         public void onResponse(Call<Void> call, Response<Void> response) {
                                             if (response.isSuccessful()) {
-                                                Toast.makeText(Signup.this, "User registered!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(Signup.this, "User registered in backend!", Toast.LENGTH_SHORT).show();
                                             } else {
                                                 Toast.makeText(Signup.this, "Failed to register user in backend.", Toast.LENGTH_SHORT).show();
                                             }
@@ -148,6 +148,5 @@ public class Signup extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 }
