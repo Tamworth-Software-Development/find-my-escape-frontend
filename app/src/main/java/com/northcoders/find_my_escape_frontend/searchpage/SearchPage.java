@@ -30,7 +30,7 @@ import java.util.List;
 import cz.msebera.android.httpclient.Header;
 
 public class SearchPage extends AppCompatActivity {
-
+//Add functionality such that if the user is a guest then the favourited locations and recycler view are not shown.
     AutoCompleteTextView searchtext;
     Button goButton;
     ArrayAdapter<String> arrayAdapter;

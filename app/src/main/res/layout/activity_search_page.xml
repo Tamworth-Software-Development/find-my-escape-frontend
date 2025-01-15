@@ -55,7 +55,28 @@
         android:layout_marginTop="10dp"
         android:text="Go!"
         android:textSize="20sp"
+        android:backgroundTint="@color/material_dynamic_primary50"
         />
 
+    <TextView
+        android:id="@+id/locationtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/gobutton"
+        android:text="Favourited locations:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="cursive"
+        android:textSize="40sp"
+        android:layout_marginTop="20dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/locationtext"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/searchRV"
+        android:layout_marginTop="20dp"
+     />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
