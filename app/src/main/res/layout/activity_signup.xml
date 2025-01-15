@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/name"
-        android:inputType="textEmailAddress"
+        android:inputType="textPersonName"
         android:padding="12dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/black"
