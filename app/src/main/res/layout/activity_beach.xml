@@ -50,5 +50,15 @@
         app:layout_constraintStart_toStartOf="@+id/name"
         app:layout_constraintTop_toBottomOf="@+id/name"
         android:layout_marginTop="20dp" />
+
+    <CheckBox
+        android:id="@+id/favourite"
+        android:button="@drawable/selector_favourite"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="50dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
