@@ -11,4 +11,9 @@
     <string name="create_an_account">Create an account</string>
     <string name="name">Name</string>
     <string name="continue_as_guest">Continue as guest</string>
+    <string name="my_account">My Account</string>
+    <string name="update">Update</string>
+    <string name="enter_new_password">Enter new password</string>
+    <string name="confirm_new_password">Confirm new password</string>
+    <string name="update_password">Update password</string>
 </resources>
