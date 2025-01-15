@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="restaurant"
+            type="com.northcoders.find_my_escape_frontend.model.Restaurant" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    >
 
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@{restaurant.name}"
         tools:text="Name"
         tools:layout_editor_absoluteX="28dp"
         tools:layout_editor_absoluteY="19dp"
@@ -22,7 +29,7 @@
         android:id="@+id/formatted"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@{restaurant.formatted}"
         tools:text="Formatted Address"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="53dp"
@@ -34,7 +41,7 @@
         android:id="@+id/opening_hours"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@{restaurant.openingHours}"
         tools:text="Opening Hours"
         tools:layout_editor_absoluteX="325dp"
         tools:layout_editor_absoluteY="19dp"
@@ -46,7 +53,7 @@
         android:id="@+id/website"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@{restaurant.website}"
         tools:text="Website"
         tools:layout_editor_absoluteX="40dp"
         tools:layout_editor_absoluteY="81dp"
@@ -60,7 +67,7 @@
         android:id="@+id/cuisine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@{restaurant.cuisine}"
         tools:text="Cuisine"
         tools:layout_editor_absoluteX="343dp"
         tools:layout_editor_absoluteY="20dp"
@@ -68,3 +75,4 @@
         app:layout_constraintStart_toStartOf="@+id/name"
         android:layout_marginTop="20dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

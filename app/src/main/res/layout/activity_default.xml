@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="defaultActivity"
+            type="com.northcoders.find_my_escape_frontend.model.Default" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    >
 
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@{defaultActivity.name}"
         tools:text="Name"
         tools:layout_editor_absoluteX="28dp"
         tools:layout_editor_absoluteY="19dp"
@@ -22,7 +29,7 @@
         android:id="@+id/formatted"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@{defaultActivity.formatted}"
         tools:text="Formatted Address"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="53dp"
@@ -34,7 +41,7 @@
         android:id="@+id/opening_hours"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@{defaultActivity.openingHours}"
         tools:text="Opening Hours"
         tools:layout_editor_absoluteX="325dp"
         tools:layout_editor_absoluteY="19dp"
@@ -46,7 +53,7 @@
         android:id="@+id/website"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@{defaultActivity.website}"
         tools:text="Website"
         tools:layout_editor_absoluteX="40dp"
         tools:layout_editor_absoluteY="81dp"
@@ -56,3 +63,4 @@
         android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

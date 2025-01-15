@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="sport"
+            type="com.northcoders.find_my_escape_frontend.model.Sport" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@{sport.name}"
         tools:text="Name"
         tools:layout_editor_absoluteX="28dp"
         tools:layout_editor_absoluteY="19dp"
@@ -22,7 +28,7 @@
         android:id="@+id/formatted"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@{sport.formatted}"
         tools:text="Formatted Address"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="53dp"
@@ -34,7 +40,7 @@
         android:id="@+id/opening_hours"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@{sport.openingHours}"
         tools:text="Opening Hours"
         tools:layout_editor_absoluteX="325dp"
         tools:layout_editor_absoluteY="19dp"
@@ -46,7 +52,7 @@
         android:id="@+id/website"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@{sport.website}"
         tools:text="Website"
         tools:layout_editor_absoluteX="40dp"
         tools:layout_editor_absoluteY="81dp"
@@ -60,7 +66,7 @@
         android:id="@+id/leisure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@{sport.leisure}"
         tools:text="Leisure"
         tools:layout_editor_absoluteX="343dp"
         tools:layout_editor_absoluteY="20dp"
@@ -68,3 +74,4 @@
         app:layout_constraintStart_toStartOf="@+id/name"
         android:layout_marginTop="20dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
