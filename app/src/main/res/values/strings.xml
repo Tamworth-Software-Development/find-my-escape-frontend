@@ -16,4 +16,5 @@
     <string name="enter_new_password">Enter new password</string>
     <string name="confirm_new_password">Confirm new password</string>
     <string name="update_password">Update password</string>
+    <string name="delete_account">Delete Account</string>
 </resources>
