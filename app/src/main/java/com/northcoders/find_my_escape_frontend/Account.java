@@ -43,6 +43,10 @@ public class Account extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), Login.class);
             startActivity(intent);
             finish();
+        } else if (currentUser.getEmail() == null) {
+            Intent intent = new Intent(getApplicationContext(), GuestAccount.class);
+            startActivity(intent);
+            finish();
         }
     }
 
@@ -125,6 +129,19 @@ public class Account extends AppCompatActivity {
                     return;
                 }
                 updateUser(firebaseUser.getUid(), updatedName, updatedEmail);
+
+                if(!updatedEmail.equals(firebaseUser.getEmail())) {
+                    firebaseUser.updateEmail(updatedEmail)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(Account.this, "User email address updated.", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                }
+                            });
+                }
             }
         });
 

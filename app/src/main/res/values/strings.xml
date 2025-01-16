@@ -17,4 +17,5 @@
     <string name="confirm_new_password">Confirm new password</string>
     <string name="update_password">Update password</string>
     <string name="delete_account">Delete Account</string>
+    <string name="guest_signup">You are currently signed in as a guest. Sign up below to manage your account.</string>
 </resources>

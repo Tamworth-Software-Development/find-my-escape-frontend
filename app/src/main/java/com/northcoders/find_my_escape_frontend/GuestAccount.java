@@ -12,9 +12,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.northcoders.find_my_escape_frontend.model.User;
 import com.northcoders.find_my_escape_frontend.service.ApiService;
 import com.northcoders.find_my_escape_frontend.service.RetrofitInstance;
@@ -23,16 +26,22 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Signup extends AppCompatActivity {
+public class GuestAccount extends AppCompatActivity {
 
     EditText nameEditText, emailEditText, passwordEditText, passwordConfirmEditText;
     Button signupButton, loginPageButton;
     FirebaseAuth mAuth;
 
+    FirebaseUser firebaseUser;
+
     public void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
+        if (currentUser == null) {
+            Intent intent = new Intent(getApplicationContext(), Login.class);
+            startActivity(intent);
+            finish();
+        } else if (currentUser.getEmail() != null) {
             Intent intent = new Intent(getApplicationContext(), Account.class);
             startActivity(intent);
             finish();
@@ -42,7 +51,7 @@ public class Signup extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+        setContentView(R.layout.activity_guest_acoount);
 
         mAuth = FirebaseAuth.getInstance();
         nameEditText = findViewById(R.id.editTextNameSignup);
@@ -51,6 +60,8 @@ public class Signup extends AppCompatActivity {
         passwordConfirmEditText = findViewById(R.id.editTextConfirmPassword);
         signupButton = findViewById(R.id.signupButton);
         loginPageButton = findViewById(R.id.buttonGoToLogin);
+        firebaseUser = mAuth.getCurrentUser();
+
 
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,53 +108,61 @@ public class Signup extends AppCompatActivity {
                     return;
                 }
 
-                mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                    String uid = user != null ? user.getUid() : null;
+                if (firebaseUser != null && firebaseUser.getEmail() == null) {
+                    AuthCredential credential = EmailAuthProvider.getCredential(email, password);
+                    firebaseUser.linkWithCredential(credential)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        FirebaseUser firebaseUser = task.getResult().getUser();
 
-                                    ApiService apiService = RetrofitInstance.getRetrofitInstance().create(ApiService.class);
-                                    User userObj = new User(uid, email, name);
-                                    apiService.signupUser(userObj).enqueue(new Callback<Void>() {
-                                        @Override
-                                        public void onResponse(Call<Void> call, Response<Void> response) {
-                                            if (response.isSuccessful()) {
-                                                Toast.makeText(Signup.this, "User registered in backend!", Toast.LENGTH_SHORT).show();
-                                            } else {
-                                                Toast.makeText(Signup.this, "Failed to register user in backend.", Toast.LENGTH_SHORT).show();
+                                        String uid = firebaseUser != null ? firebaseUser.getUid() : null;
+
+                                        ApiService apiService = RetrofitInstance.getRetrofitInstance().create(ApiService.class);
+                                        User user = new User(uid, email, name);
+                                        apiService.signupUser(user).enqueue(new Callback<Void>() {
+                                            @Override
+                                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                                if (response.isSuccessful()) {
+                                                    Toast.makeText(GuestAccount.this, "User registered in backend!", Toast.LENGTH_SHORT).show();
+                                                } else {
+                                                    Toast.makeText(GuestAccount.this, "Failed to register user in backend.", Toast.LENGTH_SHORT).show();
+                                                }
                                             }
-                                        }
 
-                                        @Override
-                                        public void onFailure(Call<Void> call, Throwable t) {
-                                            Toast.makeText(Signup.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
+                                            @Override
+                                            public void onFailure(Call<Void> call, Throwable t) {
+                                                Toast.makeText(GuestAccount.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
 
-                                    Toast.makeText(Signup.this, "Account Created",
-                                            Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(GuestAccount.this, "Account Created", Toast.LENGTH_SHORT).show();
 
-                                    Intent intent = new Intent(getApplicationContext(), Login.class);
-                                    startActivity(intent);
-                                    finish();
+                                        Intent intent = new Intent(getApplicationContext(), Login.class);
+                                        startActivity(intent);
+                                        finish();
 
-                                } else {
-                                    Toast.makeText(Signup.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                    } else {
+                                        Toast.makeText(GuestAccount.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                    }
                                 }
-                            }
-                        });
+                            });
+                }
             }
         });
 
         loginPageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Login.class);
-                startActivity(intent);
-                finish();
+                firebaseUser.delete()
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                Intent intent = new Intent(getApplicationContext(), Login.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
             }
         });
     }
