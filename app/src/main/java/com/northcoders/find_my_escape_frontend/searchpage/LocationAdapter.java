@@ -16,7 +16,7 @@ import com.northcoders.find_my_escape_frontend.model.Location;
 
 import java.util.List;
 
-public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.LocationViewHolder> {
+public class LocationAdapter extends RecyclerView.Adapter<LocationViewHolder> {
     List<Location> locations;
     Context context;
 
@@ -28,19 +28,14 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
     @NonNull
     @Override
     public LocationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LocationViewBinding locationViewBinding = DataBindingUtil.inflate(
-                LayoutInflater.from(context),
-                R.layout.location_view,
-                parent,
-                false
-        );
-        return new LocationViewHolder(locationViewBinding);
+        return new LocationViewHolder(LayoutInflater.from(context).inflate(R.layout.location_view, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull LocationViewHolder holder, int position) {
         Location location = locations.get(position);
-        holder.binding.setLocation(location);
+        holder.name.setText(location.getName());
+        holder.description.setText(location.getDescription());
     }
 
 
@@ -49,11 +44,4 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
         return locations.size();
     }
 
-    public static class LocationViewHolder extends RecyclerView.ViewHolder{
-        private LocationViewBinding binding;
-        public LocationViewHolder(LocationViewBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
-    }
 }

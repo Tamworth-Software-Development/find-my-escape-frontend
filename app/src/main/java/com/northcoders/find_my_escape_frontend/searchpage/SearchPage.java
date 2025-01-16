@@ -1,6 +1,5 @@
 package com.northcoders.find_my_escape_frontend.searchpage;
 
-import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,27 +11,17 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.northcoders.find_my_escape_frontend.MainActivity;
 import com.northcoders.find_my_escape_frontend.R;
-import com.northcoders.find_my_escape_frontend.databinding.LocationViewBinding;
 import com.northcoders.find_my_escape_frontend.model.Location;
-import com.northcoders.find_my_escape_frontend.model.LocationRepository;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,18 +33,14 @@ import java.util.List;
 import cz.msebera.android.httpclient.Header;
 
 public class SearchPage extends AppCompatActivity {
-//Add functionality such that if the user is a guest then the favourited locations and recycler view are not shown.
+//Add functionality such that if the user is a guest then the favorited locations text and recycler view are not shown.
     private AutoCompleteTextView searchtext;
     private Button goButton;
     private ArrayAdapter<String> arrayAdapter;
     private List<String> locations = new ArrayList<>();
     private List<String> placeIds = new ArrayList<>();
     private RecyclerView recyclerView;
-    private MutableLiveData<List<Location>> mutableLiveData = new MutableLiveData<>();
-    private LocationViewBinding binding;
-    private SearchPageViewModel model;
-    private ArrayList<Location> favouriteLocations;
-    private LocationAdapter adapter;
+    private List<Location> favouriteLocations;
 
 
     @Override
@@ -68,13 +53,13 @@ public class SearchPage extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        LocationRepository locationRepository = new LocationRepository(new Application());
-        locationRepository.getMutableLiveData();
-
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_search_page);
-        model = new ViewModelProvider(this).get(SearchPageViewModel.class);
-
+        favouriteLocations = List.of(new Location("Barcelona", "Barcelona is a wonderful city in spain"),
+                new Location("London", "London is the capital of England and is a very famous and historic city"));
+        //This list will be retrieved from the backend API endpoint. Add logic to retrieve this.
         recyclerView = findViewById(R.id.searchRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new LocationAdapter(favouriteLocations, this));
+
         searchtext = findViewById(R.id.searchtext);
         goButton = findViewById(R.id.gobutton);
         searchtext.addTextChangedListener(new TextWatcher() {
@@ -142,24 +127,5 @@ public class SearchPage extends AppCompatActivity {
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {}
         });
     }
-
-    public void getAllLocations(){
-        model.getRecyclerViewData().observe(this, new Observer<List<Location>>() {
-            @Override
-            public void onChanged(List<Location> locations) {
-                favouriteLocations = (ArrayList<Location>) locations;
-                displayInRecyclerView();
-            }
-        });
-    }
-
-    public void displayInRecyclerView(){
-        adapter = new LocationAdapter(favouriteLocations, this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
-        adapter.notifyDataSetChanged();
-    }
-
 
 }

@@ -4,8 +4,7 @@ public class Location {
     private String name;
     private String description;
 
-    public Location() {
-    }
+    public Location() {}
 
     public Location(String name, String description) {
         this.name = name;

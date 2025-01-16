@@ -22,12 +22,8 @@ import java.util.List;
 import cz.msebera.android.httpclient.Header;
 
 public class LocationRepository {
-    private MutableLiveData<List<Location>> mutableLiveData = new MutableLiveData<>();
-    private Application application;
 
-    public LocationRepository(Application application) {
-        this.application = application;
-    }
+    public LocationRepository() {}
 
     public MutableLiveData<List<Location>> getMutableLiveData(){
         String favourites_url = ""; //enter correct url here
