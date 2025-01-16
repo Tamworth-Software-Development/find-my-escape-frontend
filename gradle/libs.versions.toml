@@ -10,6 +10,7 @@ constraintlayout = "2.2.0"
 retrofit = "2.10.0"
 
 [libraries]
+firebase-auth = { module = "com.google.firebase:firebase-auth" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
