@@ -102,10 +102,8 @@ public class Signup extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-
                                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                     String uid = user != null ? user.getUid() : null;
-                                    String email = user != null ? user.getEmail() : null;
 
                                     ApiService apiService = RetrofitInstance.getRetrofitInstance().create(ApiService.class);
                                     User userObj = new User(uid, email, name);
