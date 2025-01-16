@@ -12,8 +12,6 @@ public class LocationViewHolder extends RecyclerView.ViewHolder {
 
     TextView name;
     TextView description;
-
-    SearchPageClickHandler handler;
     public LocationViewHolder(@NonNull View itemView) {
         super(itemView);
         name = itemView.findViewById(R.id.faveName);
@@ -22,7 +20,7 @@ public class LocationViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 //Add logic to switch to a new page, which displays the favourite activities for this location.
-                handler.recyclerViewClicked();
+                System.out.println(name.getText().toString() + " has been clicked");
             }
         });
     }

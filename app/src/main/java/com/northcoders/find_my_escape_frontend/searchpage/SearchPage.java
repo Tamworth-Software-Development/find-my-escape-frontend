@@ -18,9 +18,14 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.northcoders.find_my_escape_frontend.R;
 import com.northcoders.find_my_escape_frontend.model.Location;
-import com.northcoders.find_my_escape_frontend.model.LocationRepository;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +41,6 @@ public class SearchPage extends AppCompatActivity {
     private List<String> placeIds = new ArrayList<>();
     private RecyclerView recyclerView;
     private List<Location> favouriteLocations;
-    private SearchPageClickHandler handler;
-    private LocationRepository repository;
 
 
     @Override
@@ -67,10 +70,7 @@ public class SearchPage extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String str = s.toString();
-                repository.getLocationSuggestions(str);
-                arrayAdapter = new ArrayAdapter<>(SearchPage.this, android.R.layout.simple_expandable_list_item_1, repository.getLocations());
-                searchtext.setAdapter(arrayAdapter);
-                searchtext.showDropDown();
+                getLocationSuggestions(str);
             }
 
             @Override
@@ -90,8 +90,52 @@ public class SearchPage extends AppCompatActivity {
             public void onClick(View v) {
                 //Logic to send an update request to the backend API and to change the view.
                 //Method that contains this logic.
-                handler.goButtonClicked(repository.getLocations(), repository.getPlaceIds(), searchtext.getText().toString());
+                for (int i = 0; i < locations.size(); i++) {
+                    if (locations.get(i).equals(searchtext.getText().toString())) {
+                        String formatted = locations.get(i);
+                        String place_id = placeIds.get(i);
+                        System.out.println(formatted);
+                        System.out.println(place_id);
+                        // call update method i.e updateUser(int userId, String formatted, String place_id)
+                        // Change the view using intent to the destination view.
+                    }
+                }
             }
         });
+    }
+
+    public void getLocationSuggestions(String s) {
+        locations = new ArrayList<>();
+        placeIds = new ArrayList<>();
+        String url = "https://api.geoapify.com/v1/geocode/autocomplete?text=" + s + "&limit=5&apiKey=741c790467f44c29b744bbf236d0f337";
+        new AsyncHttpClient().get(url, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                try {
+                    JSONObject locationNames = new JSONObject(new String(responseBody));
+                    JSONArray array = locationNames.getJSONArray("features");
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject object = array.getJSONObject(i);
+                        JSONObject properties = object.getJSONObject("properties");
+                        locations.add(properties.getString("formatted"));
+                        placeIds.add(properties.getString("place_id"));
+                    }
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+                arrayAdapter = new ArrayAdapter<>(SearchPage.this, android.R.layout.simple_expandable_list_item_1, locations);
+                searchtext.setAdapter(arrayAdapter);
+                searchtext.showDropDown();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+            }
+
+        });
+    }
+
+    public void getFavouriteList(){
+        //Add logic to get the favouriteList from the backend API.
     }
 }
