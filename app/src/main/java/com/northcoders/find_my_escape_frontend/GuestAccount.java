@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.EmailAuthProvider;
@@ -19,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.northcoders.find_my_escape_frontend.model.User;
+import com.northcoders.find_my_escape_frontend.searchpage.SearchPage;
 import com.northcoders.find_my_escape_frontend.service.ApiService;
 import com.northcoders.find_my_escape_frontend.service.RetrofitInstance;
 
@@ -31,7 +33,7 @@ public class GuestAccount extends AppCompatActivity {
     EditText nameEditText, emailEditText, passwordEditText, passwordConfirmEditText;
     Button signupButton, loginPageButton;
     FirebaseAuth mAuth;
-
+FloatingActionButton backButton;
     FirebaseUser firebaseUser;
 
     public void onStart() {
@@ -61,7 +63,7 @@ public class GuestAccount extends AppCompatActivity {
         signupButton = findViewById(R.id.signupButton);
         loginPageButton = findViewById(R.id.buttonGoToLogin);
         firebaseUser = mAuth.getCurrentUser();
-
+backButton = findViewById(R.id.backButton);
 
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,6 +165,14 @@ public class GuestAccount extends AppCompatActivity {
                                 finish();
                             }
                         });
+            }
+        });
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SearchPage.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
