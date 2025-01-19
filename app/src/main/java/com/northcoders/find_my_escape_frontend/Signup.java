@@ -16,6 +16,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.northcoders.find_my_escape_frontend.model.User;
+import com.northcoders.find_my_escape_frontend.searchpage.SearchPage;
 import com.northcoders.find_my_escape_frontend.service.ApiService;
 import com.northcoders.find_my_escape_frontend.service.RetrofitInstance;
 
@@ -33,7 +34,7 @@ public class Signup extends AppCompatActivity {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            Intent intent = new Intent(getApplicationContext(), Account.class);
+            Intent intent = new Intent(getApplicationContext(), SearchPage.class);
             startActivity(intent);
             finish();
         }
