@@ -16,6 +16,9 @@
             android:name=".GuestAccount"
             android:exported="false" />
         <activity
+            android:name=".searchpage.SearchPage"
+            android:exported="false" />
+        <activity
             android:name=".Account"
             android:exported="false" />
         <activity
