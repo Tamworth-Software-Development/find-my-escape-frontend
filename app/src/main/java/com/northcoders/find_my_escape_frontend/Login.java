@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.northcoders.find_my_escape_frontend.searchpage.SearchPage;
 
 public class Login extends AppCompatActivity {
 
@@ -26,7 +27,7 @@ public class Login extends AppCompatActivity {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            Intent intent = new Intent(getApplicationContext(), Account.class);
+            Intent intent = new Intent(getApplicationContext(), SearchPage.class);
             startActivity(intent);
             finish();
         }
@@ -74,7 +75,7 @@ public class Login extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    Intent intent = new Intent(getApplicationContext(), Account.class);
+                                    Intent intent = new Intent(getApplicationContext(), SearchPage.class);
                                     startActivity(intent);
                                     finish();
                                 } else {
@@ -102,7 +103,7 @@ public class Login extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    Intent intent = new Intent(getApplicationContext(), Account.class);
+                                    Intent intent = new Intent(getApplicationContext(), SearchPage.class);
                                     startActivity(intent);
                                     finish();
                                 } else {
