@@ -41,6 +41,8 @@ dependencies {
     implementation libs.constraintlayout
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.0'
     implementation 'de.grundid.opendatalab:geojson-jackson:1.8.1'
+    implementation libs.navigation.fragment
+    implementation libs.navigation.ui
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core

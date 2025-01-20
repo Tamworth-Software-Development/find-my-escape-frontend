@@ -15,10 +15,12 @@ import androidx.databinding.DataBindingUtil;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.northcoders.find_my_escape_frontend.databinding.ActivityAccountBinding;
 import com.northcoders.find_my_escape_frontend.model.User;
+import com.northcoders.find_my_escape_frontend.searchpage.SearchPage;
 import com.northcoders.find_my_escape_frontend.service.ApiService;
 import com.northcoders.find_my_escape_frontend.service.RetrofitInstance;
 
@@ -30,6 +32,7 @@ public class Account extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     Button updateInfoButton, changePasswordButton, logoutButton, deleteAccountButton;
+    FloatingActionButton backButton;
     EditText editTextName, editTextEmail, editTextNewPassword, editTextNewPasswordConfirm;
     FirebaseUser firebaseUser;
     User user;
@@ -106,6 +109,7 @@ public class Account extends AppCompatActivity {
         updateInfoButton = findViewById(R.id.updateInfoButton);
         changePasswordButton = findViewById(R.id.changePasswordButton);
         deleteAccountButton = findViewById(R.id.deleteAccountButton);
+        backButton = findViewById(R.id.backButton);
 
 
         user = new User();
@@ -223,6 +227,15 @@ public class Account extends AppCompatActivity {
                         .setNegativeButton("Cancel", null)
                         .show();
 
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SearchPage.class);
+                startActivity(intent);
+                finish();
             }
         });
 

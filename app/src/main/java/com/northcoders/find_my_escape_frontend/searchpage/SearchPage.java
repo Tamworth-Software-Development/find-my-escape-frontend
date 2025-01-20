@@ -1,6 +1,7 @@
 package com.northcoders.find_my_escape_frontend.searchpage;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,6 +19,9 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.northcoders.find_my_escape_frontend.Account;
+import com.northcoders.find_my_escape_frontend.MainActivity;
 import com.northcoders.find_my_escape_frontend.R;
 import com.northcoders.find_my_escape_frontend.model.Location;
 import com.northcoders.find_my_escape_frontend.model.LocationRepository;
@@ -31,6 +35,7 @@ public class SearchPage extends AppCompatActivity {
     //Add functionality such that if the user is a guest then the favorited locations text and recycler view are not shown.
     private AutoCompleteTextView searchtext;
     private Button goButton;
+    FloatingActionButton accountSettingsButton, favouriteLocationsButton;
     private ArrayAdapter<String> arrayAdapter;
     private List<String> locations = new ArrayList<>();
     private List<String> placeIds = new ArrayList<>();
@@ -56,7 +61,8 @@ public class SearchPage extends AppCompatActivity {
         recyclerView = findViewById(R.id.searchRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new LocationAdapter(favouriteLocations, this));
-
+        accountSettingsButton = findViewById(R.id.accountSettingsButton);
+        favouriteLocationsButton = findViewById(R.id.favouriteLocationsButton);
         searchtext = findViewById(R.id.searchtext);
         goButton = findViewById(R.id.gobutton);
         searchtext.addTextChangedListener(new TextWatcher() {
@@ -93,5 +99,25 @@ public class SearchPage extends AppCompatActivity {
                 handler.goButtonClicked(repository.getLocations(), repository.getPlaceIds(), searchtext.getText().toString());
             }
         });
+
+        accountSettingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Account.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        favouriteLocationsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Account.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
+
+
 }
