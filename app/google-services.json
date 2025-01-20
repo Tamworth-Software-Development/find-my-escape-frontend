@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "71366405186",
+    "project_id": "find-my-escape",
+    "storage_bucket": "find-my-escape.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:71366405186:android:dac1149b0358d607bf51db",
+        "android_client_info": {
+          "package_name": "com.northcoders.find_my_escape_frontend"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAM7ue50b7sXniNbfuIQUKdR4Uj7DXjs58"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
