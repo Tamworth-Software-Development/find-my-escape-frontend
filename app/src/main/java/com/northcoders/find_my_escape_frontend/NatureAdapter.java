@@ -40,7 +40,10 @@ public class NatureAdapter extends RecyclerView.Adapter<NatureAdapter.NatureView
 
     @Override
     public int getItemCount() {
-        return natureList.size();
+        if (natureList != null) {
+            return natureList.size();
+        }
+        return 0;
     }
 
 

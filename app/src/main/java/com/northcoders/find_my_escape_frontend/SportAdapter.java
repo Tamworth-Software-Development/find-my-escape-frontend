@@ -40,7 +40,10 @@ public class SportAdapter extends RecyclerView.Adapter<SportAdapter.SportViewHol
 
     @Override
     public int getItemCount() {
-        return sportList.size();
+        if (sportList != null) {
+            return sportList.size();
+        }
+        return 0;
     }
 
 

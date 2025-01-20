@@ -40,7 +40,10 @@ public class MuseumAdapter extends RecyclerView.Adapter<MuseumAdapter.MuseumView
 
     @Override
     public int getItemCount() {
-        return museums.size();
+        if (museums != null) {
+            return museums.size();
+        }
+        return 0;
     }
 
     public static class MuseumViewHolder extends RecyclerView.ViewHolder {

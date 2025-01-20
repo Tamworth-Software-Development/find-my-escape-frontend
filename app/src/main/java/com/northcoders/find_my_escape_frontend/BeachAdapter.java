@@ -40,7 +40,10 @@ public class BeachAdapter extends RecyclerView.Adapter<BeachAdapter.BeachViewHol
 
     @Override
     public int getItemCount() {
-        return beaches.size();
+        if (beaches != null) {
+            return beaches.size();
+        }
+        return 0;
     }
 
     public static class BeachViewHolder extends RecyclerView.ViewHolder {

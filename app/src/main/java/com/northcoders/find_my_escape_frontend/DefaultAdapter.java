@@ -40,7 +40,10 @@ public class DefaultAdapter extends RecyclerView.Adapter<DefaultAdapter.DefaultV
 
     @Override
     public int getItemCount() {
-        return defaultActivities.size();
+        if (defaultActivities != null) {
+            return defaultActivities.size();
+        }
+        return 0;
     }
 
     public static class DefaultViewHolder extends RecyclerView.ViewHolder {
