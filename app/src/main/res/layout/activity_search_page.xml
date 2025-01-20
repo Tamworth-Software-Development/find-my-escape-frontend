@@ -43,7 +43,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginStart="60dp"
             android:hint="Search for location..."
-            android:completionThreshold="1"
+            android:completionThreshold="3"
             android:textSize="14sp"
             />
 
@@ -75,9 +75,10 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/searchRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@+id/locationtext"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginTop="20dp"
             />
 
