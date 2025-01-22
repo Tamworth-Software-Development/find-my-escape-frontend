@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,17 +41,20 @@ import okhttp3.Response;
 
 public class Destination extends AppCompatActivity {
 
+    private TextView destination;
+    private TextView description;
     private Spinner dropdown;
     private RecyclerView recyclerView;
     private ActivityDestinationBinding activityDestinationBinding;
-    DestinationViewModel viewModel;
+    //DestinationViewModel viewModel;
+
     List<Beach> beaches;
     List<Default> defaults = new ArrayList<>();
     List<Museum> museums;
     List<Nature> nature;
     List<Restaurant> restaurants;
     List<Sport> sport;
-    byte[] nightlifeStuff;
+
     OkHttpClient client;
     MutableLiveData<List<Default>> defaultMutableLiveData = new MutableLiveData<>();
     MutableLiveData<List<Beach>> beachMutableLiveData = new MutableLiveData<>();
@@ -75,17 +79,59 @@ public class Destination extends AppCompatActivity {
         // Specify the layout to use when the list of choices appears
         dropdownAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        viewModel = new ViewModelProvider(this).get(DestinationViewModel.class);
+        //viewModel = new ViewModelProvider(this).get(DestinationViewModel.class);
+
+        destination = findViewById(R.id.destination);
+        description = findViewById(R.id.description);
+
+        String placeName = "paris";
+
+        destination.setText(placeName);
 
         client = new OkHttpClient();
 
-//        List<Sport> sports = List.of(
-//                new Sport("name", "leisure", "opening hours", "formatted", "web"),
-//                new Sport("name", "leisure", "opening hours", "formatted", "web")
-//        );
-//
-        defaults.add(new Default("name", "opening hours", "formatted", "web"));
-        defaults.add(new Default("name", "opening hours", "formatted", "web"));
+        String descriptionUrl = String.format("https://en.wikipedia.org/w/api.php?action=query&titles=%s&format=json&prop=pageimages|extracts&formatversion=2&piprop=original&pithumbsize=1000&pilicense=free&exchars=250&exintro=1&explaintext=1", placeName);
+
+        Request request = new Request.Builder().url(descriptionUrl).build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                description.setText("No description available");
+
+                Log.e("GET", "get description failed", e);
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        String descriptionText = "";
+
+                        try {
+                            JSONObject data = new JSONObject(response.body().string());
+                            JSONObject page = data.getJSONObject("query").getJSONArray("pages").getJSONObject(0);
+
+                            if (page.has("extract")) {
+                                descriptionText = page.getString("extract");
+                            }
+
+                        } catch (JSONException | IOException e) {
+                            Log.e("Inner GET", "Exception during GET description call", e);
+                        }
+
+                        if (descriptionText.isEmpty()) {
+                            descriptionText = "No description available";
+                        }
+
+                        description.setText(descriptionText);
+
+                    }
+                });
+            }
+        });
 
 //        System.out.println("ABOVE");
 //
