@@ -19,11 +19,7 @@
             android:name=".Destination"
             android:exported="false" />
 
-      //  <activity
-       //     android:name=".MainActivity"
-        //    android:exported="true" >
-        //    android:name=".searchpage.SearchPage"
-       //     android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="false" />
