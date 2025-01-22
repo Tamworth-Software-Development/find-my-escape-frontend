@@ -86,13 +86,15 @@ public class Destination extends AppCompatActivity {
 
         String placeName = "paris";
 
+        String placeId = "place:5184680822e6551340590dd87a2bb7e14640f00103f9017672bf6f00000000c00203";
+
         destination.setText(placeName);
 
         client = new OkHttpClient();
 
-        //String descriptionUrl = String.format("https://en.wikipedia.org/w/api.php?action=query&titles=%s&format=json&prop=pageimages|extracts&formatversion=2&piprop=original&pithumbsize=1000&pilicense=free&exchars=250&exintro=1&explaintext=1", placeName);
+        String descriptionUrl = String.format("https://en.wikipedia.org/w/api.php?action=query&titles=%s&format=json&prop=pageimages|extracts&formatversion=2&piprop=original&pithumbsize=1000&pilicense=free&exchars=250&exintro=1&explaintext=1", placeName);
 
-        String descriptionUrl = String.format("http://10.0.2.2:8080/api/v1/location/information/%s", placeName);
+        //String descriptionUrl = String.format("http://10.0.2.2:8080/api/v1/location/information/%s", placeName);
 
         Request request = new Request.Builder().url(descriptionUrl).build();
 
@@ -114,10 +116,10 @@ public class Destination extends AppCompatActivity {
 
                         try {
                             JSONObject data = new JSONObject(response.body().string());
-                            //JSONObject page = data.getJSONObject("query").getJSONArray("pages").getJSONObject(0);
+                            JSONObject page = data.getJSONObject("query").getJSONArray("pages").getJSONObject(0);
 
-                            if (data.has("extract")) {
-                                descriptionText = data.getString("extract");
+                            if (page.has("extract")) {
+                                descriptionText = page.getString("extract");
                             }
 
                         } catch (JSONException | IOException e) {
@@ -135,36 +137,6 @@ public class Destination extends AppCompatActivity {
             }
         });
 
-//        System.out.println("ABOVE");
-//
-//        String url = "https://api.geoapify.com/v2/places?apiKey=b12260ebfdd0467bbebc0fefe6930dc9&categories=adult.nightclub,catering.bar&filter=place:5184680822e6551340590dd87a2bb7e14640f00103f9017672bf6f00000000c00203";
-//        new AsyncHttpClient().get(url, new AsyncHttpResponseHandler() {
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-//                System.out.println("above the try but in the onSuccess");
-//                try {
-//                    JSONObject jsonObject = new JSONObject(new String(responseBody));
-//                    System.out.println(jsonObject.toString());
-//                    JSONArray jsonArray = jsonObject.getJSONArray("features");
-//                    for (int i = 0; i < jsonArray.length(); i++) {
-//                        JSONObject jsonObject2 = jsonArray.getJSONObject(i);
-//                        JSONObject properties = jsonObject2.getJSONObject("properties");
-//
-//                    }
-//                } catch (JSONException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-//                //Cry
-//                System.out.println("FAILED");
-//            }
-//        });
-
-
-        String place = "place:5184680822e6551340590dd87a2bb7e14640f00103f9017672bf6f00000000c00203";
 
         // Apply the adapter to the spinner
         dropdown.setAdapter(dropdownAdapter);
@@ -176,7 +148,7 @@ public class Destination extends AppCompatActivity {
 
                         List<Default> defaultList = new ArrayList<>();
 
-                        String url = "https://api.geoapify.com/v2/places?apiKey=b12260ebfdd0467bbebc0fefe6930dc9&categories=adult.nightclub,catering.bar&filter=".concat(place);
+                        String url = "https://api.geoapify.com/v2/places?apiKey=b12260ebfdd0467bbebc0fefe6930dc9&categories=adult.nightclub,catering.bar&filter=".concat(placeId);
 
                         Request request = new Request.Builder()
                                 .url(url)
@@ -263,7 +235,7 @@ public class Destination extends AppCompatActivity {
                     case 1: {
                         List<Beach> beachList = new ArrayList<>();
 
-                        String url = "https://api.geoapify.com/v2/places?apiKey=b12260ebfdd0467bbebc0fefe6930dc9&categories=beach&filter=".concat(place);
+                        String url = "https://api.geoapify.com/v2/places?apiKey=b12260ebfdd0467bbebc0fefe6930dc9&categories=beach&filter=".concat(placeId);
 
                         Request request = new Request.Builder()
                                 .url(url)
@@ -342,7 +314,7 @@ public class Destination extends AppCompatActivity {
                     case 2: {
                         List<Default> defaultList = new ArrayList<>();
 
-                        String url = "https://api.geoapify.com/v2/places?apiKey=b12260ebfdd0467bbebc0fefe6930dc9&categories=entertainment.culture&filter=".concat(place);
+                        String url = "https://api.geoapify.com/v2/places?apiKey=b12260ebfdd0467bbebc0fefe6930dc9&categories=entertainment.culture&filter=".concat(placeId);
 
                         Request request = new Request.Builder()
                                 .url(url)
@@ -429,7 +401,7 @@ public class Destination extends AppCompatActivity {
                     case 3: {
                         List<Museum> museumList = new ArrayList<>();
 
-                        String url = "https://api.geoapify.com/v2/places?apiKey=b12260ebfdd0467bbebc0fefe6930dc9&categories=entertainment.museum&filter=".concat(place);
+                        String url = "https://api.geoapify.com/v2/places?apiKey=b12260ebfdd0467bbebc0fefe6930dc9&categories=entertainment.museum&filter=".concat(placeId);
 
                         Request request = new Request.Builder()
                                 .url(url)
@@ -525,7 +497,7 @@ public class Destination extends AppCompatActivity {
                     case 4: {
                         List<Default> defaultList = new ArrayList<>();
 
-                        String url = "https://api.geoapify.com/v2/places?apiKey=b12260ebfdd0467bbebc0fefe6930dc9&categories=tourism.attraction,tourism.sights&filter=".concat(place);
+                        String url = "https://api.geoapify.com/v2/places?apiKey=b12260ebfdd0467bbebc0fefe6930dc9&categories=tourism.attraction,tourism.sights&filter=".concat(placeId);
 
 
                         Request request = new Request.Builder()
@@ -613,7 +585,7 @@ public class Destination extends AppCompatActivity {
                     case 5: {
                         List<Restaurant> restaurantList = new ArrayList<>();
 
-                        String url = "https://api.geoapify.com/v2/places?apiKey=b12260ebfdd0467bbebc0fefe6930dc9&categories=catering.restaurant&filter=".concat(place);
+                        String url = "https://api.geoapify.com/v2/places?apiKey=b12260ebfdd0467bbebc0fefe6930dc9&categories=catering.restaurant&filter=".concat(placeId);
 
                         Request request = new Request.Builder()
                                 .url(url)
@@ -709,7 +681,7 @@ public class Destination extends AppCompatActivity {
                     case 6: {
                         List<Nature> natureList = new ArrayList<>();
 
-                        String url = "https://api.geoapify.com/v2/places?apiKey=b12260ebfdd0467bbebc0fefe6930dc9&categories=natural&filter=".concat(place);
+                        String url = "https://api.geoapify.com/v2/places?apiKey=b12260ebfdd0467bbebc0fefe6930dc9&categories=natural&filter=".concat(placeId);
 
 
                         Request request = new Request.Builder()
@@ -790,7 +762,7 @@ public class Destination extends AppCompatActivity {
                     case 7: {
                         List<Sport> sportList = new ArrayList<>();
 
-                        String url = "https://api.geoapify.com/v2/places?apiKey=b12260ebfdd0467bbebc0fefe6930dc9&categories=sport&filter=".concat(place);
+                        String url = "https://api.geoapify.com/v2/places?apiKey=b12260ebfdd0467bbebc0fefe6930dc9&categories=sport&filter=".concat(placeId);
 
 
                         Request request = new Request.Builder()
