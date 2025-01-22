@@ -90,7 +90,9 @@ public class Destination extends AppCompatActivity {
 
         client = new OkHttpClient();
 
-        String descriptionUrl = String.format("https://en.wikipedia.org/w/api.php?action=query&titles=%s&format=json&prop=pageimages|extracts&formatversion=2&piprop=original&pithumbsize=1000&pilicense=free&exchars=250&exintro=1&explaintext=1", placeName);
+        //String descriptionUrl = String.format("https://en.wikipedia.org/w/api.php?action=query&titles=%s&format=json&prop=pageimages|extracts&formatversion=2&piprop=original&pithumbsize=1000&pilicense=free&exchars=250&exintro=1&explaintext=1", placeName);
+
+        String descriptionUrl = String.format("http://192.168.0.16:8080/api/v1/location/information/%s", placeName);
 
         Request request = new Request.Builder().url(descriptionUrl).build();
 
@@ -112,10 +114,10 @@ public class Destination extends AppCompatActivity {
 
                         try {
                             JSONObject data = new JSONObject(response.body().string());
-                            JSONObject page = data.getJSONObject("query").getJSONArray("pages").getJSONObject(0);
+                            //JSONObject page = data.getJSONObject("query").getJSONArray("pages").getJSONObject(0);
 
-                            if (page.has("extract")) {
-                                descriptionText = page.getString("extract");
+                            if (data.has("extract")) {
+                                descriptionText = data.getString("extract");
                             }
 
                         } catch (JSONException | IOException e) {
