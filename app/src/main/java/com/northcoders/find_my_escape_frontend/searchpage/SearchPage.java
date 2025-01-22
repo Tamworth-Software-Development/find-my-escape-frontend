@@ -126,6 +126,8 @@ public class SearchPage extends AppCompatActivity {
 //                sendCityInfo(city);
                 //Changes to the desired view.
                 Intent intent = new Intent(v.getContext(), Destination.class);
+//                intent.putExtra("city", getCity());
+                intent.putExtra("placeId", getPlace_id());
                 v.getContext().startActivity(intent);
             }
         });

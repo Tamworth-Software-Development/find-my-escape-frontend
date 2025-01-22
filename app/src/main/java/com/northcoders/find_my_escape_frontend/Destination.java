@@ -1,5 +1,6 @@
 package com.northcoders.find_my_escape_frontend;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.northcoders.find_my_escape_frontend.model.Museum;
 import com.northcoders.find_my_escape_frontend.model.Nature;
 import com.northcoders.find_my_escape_frontend.model.Restaurant;
 import com.northcoders.find_my_escape_frontend.model.Sport;
+import com.northcoders.find_my_escape_frontend.searchpage.SearchPage;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,6 +49,9 @@ public class Destination extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ActivityDestinationBinding activityDestinationBinding;
     //DestinationViewModel viewModel;
+
+    String placeName;
+    String placeId;
 
     List<Beach> beaches;
     List<Default> defaults = new ArrayList<>();
@@ -84,9 +89,13 @@ public class Destination extends AppCompatActivity {
         destination = findViewById(R.id.destination);
         description = findViewById(R.id.description);
 
-        String placeName = "paris";
+        Intent intent = getIntent();
 
-        String placeId = "place:5184680822e6551340590dd87a2bb7e14640f00103f9017672bf6f00000000c00203";
+//        placeName = intent.getStringExtra("city");
+
+        placeName = "Rome";
+
+        placeId = intent.getStringExtra("placeId");
 
         destination.setText(placeName);
 
