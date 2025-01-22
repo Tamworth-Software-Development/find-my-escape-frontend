@@ -1,13 +1,36 @@
 <resources>
     <string name="app_name">find-my-escape-frontend</string>
-    <string-array name="activity_array">
-        <item>Nightlife</item>
-        <item>Beach</item>
-        <item>Culture</item>
-        <item>Museum</item>
-        <item>Tourist Attractions</item>
-        <item>Restaurants</item>
-        <item>Nature</item>
-        <item>Sport</item>
-    </string-array>
+ //   <string-array name="activity_array">
+ //       <item>Nightlife</item>
+ //       <item>Beach</item>
+ //       <item>Culture</item>
+ //       <item>Museum</item>
+  //      <item>Tourist Attractions</item>
+  //      <item>Restaurants</item>
+ //       <item>Nature</item>
+ //       <item>Sport</item>
+ //   </string-array>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="find_my_escape">Find My Escape</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="signup">Signup</string>
+    <string name="already_have_an_account_login">Already have an account? Login</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="name">Name</string>
+    <string name="continue_as_guest">Continue as guest</string>
+    <string name="my_account">My Account</string>
+    <string name="update">Update</string>
+    <string name="enter_new_password">Enter new password</string>
+    <string name="confirm_new_password">Confirm new password</string>
+    <string name="update_password">Update password</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="guest_signup">You are currently signed in as a guest. Sign up below to manage your account.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile">Profile</string>
+    <string name="home">Home</string>
+    <string name="favourities">Favourities</string>
 </resources>

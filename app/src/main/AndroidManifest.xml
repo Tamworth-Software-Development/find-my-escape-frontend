@@ -19,16 +19,36 @@
             android:name=".Destination"
             android:exported="false" />
 
+      //  <activity
+       //     android:name=".MainActivity"
+        //    android:exported="true" >
+        //    android:name=".searchpage.SearchPage"
+       //     android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" >
-
+            android:exported="false" />
+      <activity
+            android:name=".GuestAccount"
+            android:exported="false" />
+        <activity
+            android:name=".searchpage.SearchPage"
+            android:exported="false" />
+        <activity
+            android:name=".Account"
+            android:exported="false" />
+        <activity
+            android:name=".Signup"
+            android:exported="false" />
+        <activity
+            android:name=".Login"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
     </application>
 
 </manifest>
