@@ -20,8 +20,11 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.northcoders.find_my_escape_frontend.Account;
+import com.northcoders.find_my_escape_frontend.Destination;
 import com.northcoders.find_my_escape_frontend.MainActivity;
 import com.northcoders.find_my_escape_frontend.R;
 import com.northcoders.find_my_escape_frontend.model.Location;
@@ -39,6 +42,7 @@ public class SearchPage extends AppCompatActivity {
     //Add functionality such that if the user is a guest then the favourited locations text and recycler view are not shown.
     private AutoCompleteTextView searchtext;
     private Button goButton;
+    private FloatingActionButton accountSettingsButton, favouriteLocationsButton;
     private ArrayAdapter<String> arrayAdapter;
     private List<String> locations = new ArrayList<>();
     private List<String> placeIds = new ArrayList<>();
@@ -81,7 +85,8 @@ public class SearchPage extends AppCompatActivity {
         recyclerView = findViewById(R.id.searchRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new LocationAdapter(favouriteLocations, this));
-
+        accountSettingsButton = findViewById(R.id.accountSettingsButton);
+        favouriteLocationsButton = findViewById(R.id.favouriteLocationsButton);
         searchtext = findViewById(R.id.searchtext);
         goButton = findViewById(R.id.gobutton);
         searchtext.addTextChangedListener(new TextWatcher() {
@@ -114,14 +119,31 @@ public class SearchPage extends AppCompatActivity {
                 for (int i = 0; i < locations.size(); i++) {
                     if (locations.get(i).equals(searchtext.getText().toString())) {
                         place_id = placeIds.get(i);
-                        city = cities.get(i);
+//                        city = cities.get(i);
                     }
                 }
                 //Sends the city to the backend and gets the description for the city in return.
-                sendCityInfo(city);
+//                sendCityInfo(city);
                 //Changes to the desired view.
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                getApplicationContext().startActivity(intent);
+                Intent intent = new Intent(v.getContext(), Destination.class);
+                v.getContext().startActivity(intent);
+            }
+        });
+        accountSettingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Account.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        favouriteLocationsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Account.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -141,7 +163,7 @@ public class SearchPage extends AppCompatActivity {
                         JSONObject properties = object.getJSONObject("properties");
                         locations.add(properties.getString("formatted"));
                         placeIds.add(properties.getString("place_id"));
-                        cities.add(properties.getString("city"));
+//                        cities.add(properties.getString("city"));
                     }
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
@@ -160,16 +182,16 @@ public class SearchPage extends AppCompatActivity {
         });
     }
 
-    public void getFavouriteList(){
+    public void getFavouriteList() {
         //Add logic to get the favouriteList from the backend API.
         //check url is right.
         String url = "http://" + YOUR_IP_ADDRESS + ":" + PORT_NUMBER + "/api/v1/favourite-locations";
         new AsyncHttpClient().get(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                try{
+                try {
                     JSONArray faveLocationNames = new JSONArray(new String(responseBody));
-                    for (int i = 0; i < faveLocationNames.length(); i++){
+                    for (int i = 0; i < faveLocationNames.length(); i++) {
                         JSONObject location = faveLocationNames.getJSONObject(i);
                         String name = location.getString("name");
                         String description = location.getString("description");
@@ -190,7 +212,7 @@ public class SearchPage extends AppCompatActivity {
         });
     }
 
-    public void sendCityInfo(String s){
+    public void sendCityInfo(String s) {
         //Add logic to send the city to the backend API.
         String url = "http://" + YOUR_IP_ADDRESS + ":" + PORT_NUMBER + "/api/v1/location/information/" + s;
         new AsyncHttpClient().get(url, new AsyncHttpResponseHandler() {
