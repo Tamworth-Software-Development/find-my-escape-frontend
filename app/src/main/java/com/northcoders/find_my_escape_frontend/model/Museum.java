@@ -7,12 +7,12 @@ import com.northcoders.find_my_escape_frontend.BR;
 
 public class Museum extends BaseObservable {
     private String name;
-    private int fee;
+    private String fee;
     private String openingHours;
     private String formatted;
     private String website;
 
-    public Museum(String name, int fee, String openingHours, String formatted, String website) {
+    public Museum(String name, String fee, String openingHours, String formatted, String website) {
         this.name = name;
         this.fee = fee;
         this.openingHours = openingHours;
@@ -23,11 +23,11 @@ public class Museum extends BaseObservable {
     public Museum() {
     }
     @Bindable
-    public int getFee() {
+    public String getFee() {
         return fee;
     }
 
-    public void setFee(int fee) {
+    public void setFee(String fee) {
         this.fee = fee;
         notifyPropertyChanged(BR.fee);
     }
