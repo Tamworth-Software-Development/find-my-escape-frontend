@@ -1,11 +1,13 @@
 package com.northcoders.find_my_escape_frontend.searchpage;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.northcoders.find_my_escape_frontend.MainActivity;
 import com.northcoders.find_my_escape_frontend.R;
 
 public class LocationViewHolder extends RecyclerView.ViewHolder {
@@ -20,7 +22,9 @@ public class LocationViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 //Add logic to switch to a new page, which displays the favourite activities for this location.
-                System.out.println(name.getText().toString() + " has been clicked");
+                //Need to change the class to whatever class you want to go to next.
+                Intent intent = new Intent(v.getContext(), MainActivity.class);
+                v.getContext().startActivity(intent);
             }
         });
     }
