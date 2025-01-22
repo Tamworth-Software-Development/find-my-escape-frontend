@@ -92,7 +92,7 @@ public class Destination extends AppCompatActivity {
 
         //String descriptionUrl = String.format("https://en.wikipedia.org/w/api.php?action=query&titles=%s&format=json&prop=pageimages|extracts&formatversion=2&piprop=original&pithumbsize=1000&pilicense=free&exchars=250&exintro=1&explaintext=1", placeName);
 
-        String descriptionUrl = String.format("http://192.168.0.16:8080/api/v1/location/information/%s", placeName);
+        String descriptionUrl = String.format("http://10.0.2.2:8080/api/v1/location/information/%s", placeName);
 
         Request request = new Request.Builder().url(descriptionUrl).build();
 
