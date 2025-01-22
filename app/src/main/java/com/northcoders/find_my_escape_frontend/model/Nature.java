@@ -3,10 +3,12 @@ package com.northcoders.find_my_escape_frontend.model;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 
+import com.google.gson.annotations.SerializedName;
 import com.northcoders.find_my_escape_frontend.BR;
 
 public class Nature extends BaseObservable {
     private String name;
+    @SerializedName("opening_hours")
     private String openingHours;
     private String formatted;
 

@@ -3,11 +3,13 @@ package com.northcoders.find_my_escape_frontend.model;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 
+import com.google.gson.annotations.SerializedName;
 import com.northcoders.find_my_escape_frontend.BR;
 
 public class Sport extends BaseObservable {
     private String name;
     private String leisure;
+    @SerializedName("opening_hours")
     private String openingHours;
     private String formatted;
     private String website;

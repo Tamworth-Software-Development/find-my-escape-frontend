@@ -3,10 +3,14 @@ package com.northcoders.find_my_escape_frontend.model;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 
+import com.google.gson.annotations.SerializedName;
 import com.northcoders.find_my_escape_frontend.BR;
+
+import java.io.Serial;
 
 public class Default extends BaseObservable {
     private String name;
+    @SerializedName("opening_hours")
     private String openingHours;
     private String formatted;
     private String website;
@@ -55,5 +59,15 @@ public class Default extends BaseObservable {
     public void setWebsite(String website) {
         this.website = website;
         notifyPropertyChanged(BR.website);
+    }
+
+    @Override
+    public String toString() {
+        return "Default{" +
+                "name='" + name + '\'' +
+                ", openingHours='" + openingHours + '\'' +
+                ", formatted='" + formatted + '\'' +
+                ", website='" + website + '\'' +
+                '}';
     }
 }
